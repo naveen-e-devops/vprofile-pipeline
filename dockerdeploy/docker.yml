@@ -1,0 +1,39 @@
+---
+
+- hosts: docker
+  become: yes
+  remote_user: root
+  vars:
+    docker_engine: docker.io
+    docker_deamon: docker
+    docker_images: dockernaveen02/vprofile-app:latest
+  tasks:
+
+    - name: install docker engine 
+      apt:
+        name: "{{docker_engine}}"
+        state: present
+
+    - name: start docker deamon process
+      service:
+        name: "{{docker_deamon}}"
+        state: started
+        enabled: yes
+
+    - name: pull docker image from hub
+      docker_image:
+<<<<<<< HEAD
+        name: "{{docker_images}}"
+=======
+        name: "{{docker-image}}"
+>>>>>>> 1c42f18faaccab1684c2d403f895cd0fcdb66eb8
+        source: pull
+
+    - name: Run docker container
+      docker_container:
+        name: vprofile-app
+        image: "{{docker_images}}"
+        state: started
+        restart: yes
+        ports:
+         - "8080:8080"
