@@ -43,8 +43,17 @@ stage('sonarqube') {
                nexusArtifactUploader artifacts: [[artifactId: 'vprofile', classifier: '', file: 'target/vprofile-v1.war', type: 'war']], credentialsId: '34952091-6fcc-4fc5-b1f5-df8a88f9daff', groupId: 'DEV', nexusUrl: '10.128.0.4:8081/nexus', nexusVersion: 'nexus2', protocol: 'http', repository: 'vprofile-repo', version: '$BUILD_ID'
                
            }
-           
-       }  
+              }  
+//deploy artifact using ansible
+//download the artfact from nexus into tomcat server
+
+stage ("deploy"){
+            steps{
+                //deploy war file into application server
+                sh label: '', script: 'ansible-playbook deploy.yml -e buildid=$BUILD_ID'
+            }
+        }    
+
 
 }
 }
