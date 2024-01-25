@@ -19,5 +19,24 @@ pipeline {
                 sh 'mvn package '
             }
         }
+        stage('Artifact uploader'){
+            steps {
+                nexusArtifactUploader(
+                nexusVersion: 'nexus3',
+                protocol: 'http',
+                nexusUrl: '172.31.32.85:8081',
+                groupId: 'DEV',
+                version: 'v1',
+                repository: 'vprofile-repo',
+                credentialsId: 'nexus-creds',
+                artifacts: [
+                    [artifactId: 'vprofile-id',
+                    classifier: '',
+                    file: 'target/vprofile-v1.war',
+                    type: 'war']
+                    ]
+                )
+            }
+        }
     }
 }
