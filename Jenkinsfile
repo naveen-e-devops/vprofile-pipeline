@@ -10,7 +10,7 @@ pipeline {
         stage("scm"){
           steps{
               // clone source code from git
-              git 'https://github.com/naveen-e-devops/vprofile-pipeline.git'
+              git branch: 'ansible-pipeline', url: 'https://github.com/naveen-e-devops/vprofile-pipeline.git'
           }  
         }
         
