@@ -23,7 +23,7 @@ pipeline {
         }
         stage("ansible-playbook-run"){
             steps{
-                
+                ansiblePlaybook become: true, becomeUser: 'ansadm', credentialsId: 'ansible-ubuntu', disableHostKeyChecking: true, playbook: 'sample-playbook.yml', vaultTmpPath: ''
             }
         }
         
