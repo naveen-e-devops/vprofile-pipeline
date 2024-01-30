@@ -3,13 +3,13 @@
 pipeline {
  agent any
     tools {
-        maven "maven"
+        maven "maven-3"
     }
     stages{
         stage("scm"){
           steps{
               // clone source code from git
-              git 'https://github.com/naveen-e-devops/VProfile.git'
+              git 'https://github.com/naveen-e-devops/vprofile-pipeline.git'
           }  
         }
         
@@ -17,11 +17,9 @@ pipeline {
             steps{
                 // compine the source code
                 
-                sh label: '', script: 'mvn package'
+                sh 'mvn package'
             }
         }
         
-  
-
 }
 }
