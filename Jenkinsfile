@@ -21,6 +21,13 @@ pipeline {
                 sh 'mvn package'
             }
         }
+        stage("list of files"){
+            steps{
+                // compine the source code
+                
+                sh 'ls -l'
+            }
+        }
         stage("ansible-playbook-run"){
             steps{
                 ansiblePlaybook become: true, becomeUser: 'ansadm', credentialsId: 'ansible-ubuntu', disableHostKeyChecking: true, playbook: 'sample-playbook.yml', vaultTmpPath: ''
